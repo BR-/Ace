@@ -3,6 +3,8 @@
 import Ace from  "../../ace";
 import { PluginDescription } from "../../plugin";
 
+import newHTML = require("./aram.html");
+
 export default (<PluginDescription>{
     name: "aram-mapname",
     version: "1.0.0",
@@ -24,8 +26,18 @@ const Mixin = (Ember: any, ace: Ace) => ({
     didInsertElement() {
         this._super();
         Ember.run.scheduleOnce('afterRender', this, function() {
-            const controlDom = this.$(".map-12 > .parties-game-type-card-name")[0];
-            controlDom.innerHTML = "Howling Abyss"; //TODO l10n
+            const mapname = this.$(".map-12 > .parties-game-type-card-name")[0];
+            if (mapname) {
+                mapname.innerHTML = "Howling Abyss";
+            }
+            const queuetype = this.$(".map-12 + .parties-game-type-lower-half")[0];
+            if (queuetype) {
+                queuetype.innerHTML += newHTML;
+            }
+            const playercount = this.$(".map-12 > .parties-game-type-card-break")[0];
+            if (playercount) {
+                playercount.innerHTML = "5v5 ARAM";
+            }
         });
     }
 });
