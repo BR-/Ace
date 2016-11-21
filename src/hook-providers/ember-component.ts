@@ -58,6 +58,7 @@ function hookEmber(Ember: any) {
         let res = original(...args);
 
         if (name.length) {
+            // console.log("AHHHHHHHHHHHHHH ember", name[0]);
             HOOKS.filter(x => x.matcher === name[0]).forEach(hook => {
                 const hookResult = hook.fun(Ember, args);
                 if (hookResult) {
